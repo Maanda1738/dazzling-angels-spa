@@ -1,0 +1,44 @@
+NETLIFY DEPLOYMENT - SUPER SIMPLE!
+===================================
+
+Your website is ready to publish with automatic email delivery!
+
+STEP 1: CREATE NETLIFY ACCOUNT (1 minute)
+------------------------------------------
+1. Go to: https://www.netlify.com/
+2. Click "Sign Up" 
+3. Sign up with GitHub (recommended) or email
+
+STEP 2: DEPLOY YOUR WEBSITE (Drag & Drop!)
+-------------------------------------------
+1. After login, you'll see "Add new site"
+2. Click "Deploy manually"
+3. DRAG the entire "dazzling spa" folder onto the page
+4. Netlify will upload and publish your site instantly!
+5. You'll get a URL like: https://your-site-name.netlify.app
+
+STEP 3: SET UP EMAIL NOTIFICATIONS (2 minutes)
+-----------------------------------------------
+1. Once deployed, go to your site dashboard
+2. Click "Forms" in the left menu
+3. Click "Settings and usage"
+4. Under "Form notifications", click "Add notification"
+5. Choose "Email notification"
+6. Enter: Dazangelspa@gmail.com
+7. Save!
+
+DONE! 🎉
+--------
+- All bookings automatically go to: Dazangelspa@gmail.com
+- NO third-party services needed
+- NO verification from clients
+- Professional, instant delivery
+- FREE hosting forever!
+
+Your website will be live at: https://[your-site].netlify.app
+
+You can also connect a custom domain later (like dazzlingangels.co.za)
+
+
+
+
