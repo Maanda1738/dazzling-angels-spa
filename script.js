@@ -310,4 +310,4 @@ document.querySelectorAll('video').forEach(video => {
     });
 });
 
-console.log('Dazzling Angels website loaded successfully!');
+console.log('Dazzling Angels Day Spa website loaded successfully!');
