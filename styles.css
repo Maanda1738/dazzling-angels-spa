@@ -1270,6 +1270,40 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 45px;
 }
 
+/* Date Input Styling - Better mobile visibility */
+.booking-form input[type="date"] {
+    position: relative;
+    color: #333;
+    font-size: 15px;
+}
+
+.booking-form input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 1;
+    filter: invert(0.5);
+    font-size: 18px;
+}
+
+.booking-form input[type="date"]::-webkit-datetime-edit-text,
+.booking-form input[type="date"]::-webkit-datetime-edit-month-field,
+.booking-form input[type="date"]::-webkit-datetime-edit-day-field,
+.booking-form input[type="date"]::-webkit-datetime-edit-year-field {
+    color: #333;
+    font-size: 15px;
+}
+
+.booking-form input[type="date"]:not(:focus):invalid {
+    color: #999;
+}
+
+.booking-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 500;
+}
+
 /* Footer */
 .footer {
     background: var(--text-dark);

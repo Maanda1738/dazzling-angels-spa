@@ -109,7 +109,7 @@ if (bookingForm) {
         const submitBtn = bookingForm.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
-        // Netlify will handle the form submission
+        // FormSubmit will handle the form submission
     });
 }
 
