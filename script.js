@@ -13,6 +13,10 @@ function showSlide(index) {
             // Check if this slide has a video
             const video = slide.querySelector('video');
             if (video) {
+                // Load the video if not loaded
+                if (video.readyState === 0) {
+                    video.load();
+                }
                 // Reset video to start
                 video.currentTime = 0;
                 // Try to play the video
@@ -22,7 +26,9 @@ function showSlide(index) {
                         console.log('Video playing successfully');
                     }).catch(error => {
                         console.log('Video autoplay prevented:', error);
-                        // If autoplay fails, just continue with the slideshow
+                        // If autoplay fails, try again without sound
+                        video.muted = true;
+                        video.play().catch(e => console.log('Video play failed:', e));
                     });
                 }
             }
