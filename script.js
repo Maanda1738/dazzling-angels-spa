@@ -3,43 +3,79 @@ let currentSlide = 0;
 const slides = document.querySelectorAll('.hero-slide');
 const slideInterval = 5000; // 5 seconds per slide
 
-function showSlide(index) {
-    console.log('Showing slide:', index, 'of', slides.length);
-    slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        if (i === index) {
-            slide.classList.add('active');
+// Preload all videos on page load
+function preloadVideos() {
+    slides.forEach((slide, index) => {
+        const video = slide.querySelector('video');
+        if (video) {
+            console.log('Preloading video for slide', index);
+            video.muted = true; // Ensure muted for autoplay
+            video.load(); // Force load the video
             
-            // Check if this slide has a video
-            const video = slide.querySelector('video');
-            if (video) {
-                // Load the video if not loaded
-                if (video.readyState === 0) {
-                    video.load();
-                }
-                // Reset video to start
-                video.currentTime = 0;
-                // Try to play the video
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        console.log('Video playing successfully');
-                    }).catch(error => {
-                        console.log('Video autoplay prevented:', error);
-                        // If autoplay fails, try again without sound
-                        video.muted = true;
-                        video.play().catch(e => console.log('Video play failed:', e));
-                    });
-                }
-            }
-        } else {
-            // Pause videos on inactive slides
-            const video = slide.querySelector('video');
-            if (video) {
-                video.pause();
-            }
+            // Add event listeners for debugging
+            video.addEventListener('loadeddata', () => {
+                console.log('Video data loaded for slide', index);
+            });
+            
+            video.addEventListener('canplay', () => {
+                console.log('Video can play for slide', index);
+            });
+            
+            video.addEventListener('error', (e) => {
+                console.error('Video error for slide', index, ':', e);
+            });
         }
     });
+}
+
+function showSlide(index) {
+    console.log('Showing slide:', index, 'of', slides.length);
+    
+    // First, pause all videos and remove active class
+    slides.forEach((slide, i) => {
+        const video = slide.querySelector('video');
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+        slide.classList.remove('active');
+    });
+    
+    // Then activate the current slide
+    const currentSlideElement = slides[index];
+    currentSlideElement.classList.add('active');
+    
+    // Check if this slide has a video
+    const video = currentSlideElement.querySelector('video');
+    if (video) {
+        console.log('Playing video for slide', index);
+        
+        // Ensure video is muted and ready
+        video.muted = true;
+        
+        // Small delay to ensure the slide is visible before playing
+        setTimeout(() => {
+            // Reset to start and play
+            video.currentTime = 0;
+            
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Video playing successfully for slide', index);
+                }).catch(error => {
+                    console.error('Video autoplay prevented for slide', index, ':', error);
+                    
+                    // Try to reload and play again
+                    video.load();
+                    setTimeout(() => {
+                        video.play().catch(e => {
+                            console.error('Video play retry failed for slide', index, ':', e);
+                        });
+                    }, 100);
+                });
+            }
+        }, 100);
+    }
 }
 
 function nextSlide() {
@@ -51,9 +87,16 @@ function nextSlide() {
 // Start the slideshow
 if (slides.length > 0) {
     console.log('Starting slideshow with', slides.length, 'slides');
-    showSlide(currentSlide);
-    // Automatically advance every 5 seconds
-    setInterval(nextSlide, slideInterval);
+    
+    // Preload all videos first
+    preloadVideos();
+    
+    // Wait a bit for videos to start loading, then show first slide
+    setTimeout(() => {
+        showSlide(currentSlide);
+        // Automatically advance every 5 seconds
+        setInterval(nextSlide, slideInterval);
+    }, 500);
 } else {
     console.log('No slides found for slideshow');
 }
