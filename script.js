@@ -2,6 +2,13 @@
 let currentSlide = 0;
 const slides = document.querySelectorAll('.hero-slide');
 const slideInterval = 5000; // 5 seconds per slide
+let slideshowInterval = null;
+let userInteracted = false;
+
+// Enable user interaction flag on any interaction
+document.addEventListener('click', () => { userInteracted = true; }, { once: true });
+document.addEventListener('touchstart', () => { userInteracted = true; }, { once: true });
+document.addEventListener('scroll', () => { userInteracted = true; }, { once: true });
 
 // Preload all videos on page load
 function preloadVideos() {
@@ -10,6 +17,18 @@ function preloadVideos() {
         if (video) {
             console.log('Preloading video for slide', index);
             video.muted = true; // Ensure muted for autoplay
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+            video.setAttribute('muted', '');
+            video.defaultMuted = true;
+            video.volume = 0;
+            
+            // Set video source explicitly
+            const source = video.querySelector('source');
+            if (source && source.src) {
+                video.src = source.src;
+            }
+            
             video.load(); // Force load the video
             
             // Add event listeners for debugging
@@ -21,60 +40,138 @@ function preloadVideos() {
                 console.log('Video can play for slide', index);
             });
             
+            video.addEventListener('canplaythrough', () => {
+                console.log('Video can play through for slide', index);
+            });
+            
+            video.addEventListener('playing', () => {
+                console.log('Video is actually playing for slide', index);
+            });
+            
+            video.addEventListener('pause', () => {
+                console.log('Video paused for slide', index);
+            });
+            
+            video.addEventListener('stalled', () => {
+                console.warn('Video stalled for slide', index);
+            });
+            
             video.addEventListener('error', (e) => {
                 console.error('Video error for slide', index, ':', e);
+                console.error('Video src:', video.src);
+                console.error('Video readyState:', video.readyState);
             });
         }
     });
 }
 
-function showSlide(index) {
-    console.log('Showing slide:', index, 'of', slides.length);
+function forcePlayVideo(video, index, retryCount = 0) {
+    if (!video || retryCount > 5) {
+        console.error('Failed to play video after', retryCount, 'attempts');
+        return;
+    }
     
-    // First, pause all videos and remove active class
+    // Ensure video is ready
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+    video.currentTime = 0;
+    
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            console.log('✓ Video playing successfully for slide', index);
+        }).catch(error => {
+            console.error('✗ Video play failed (attempt ' + (retryCount + 1) + ') for slide', index, ':', error.message);
+            
+            // Different retry strategies
+            if (retryCount < 2) {
+                // First retry: just try again
+                setTimeout(() => {
+                    forcePlayVideo(video, index, retryCount + 1);
+                }, 100);
+            } else if (retryCount < 4) {
+                // Second retry: reload first
+                setTimeout(() => {
+                    video.load();
+                    setTimeout(() => {
+                        forcePlayVideo(video, index, retryCount + 1);
+                    }, 200);
+                }, 100);
+            } else {
+                // Final retry: wait for user interaction
+                if (!userInteracted) {
+                    console.warn('Waiting for user interaction to play video');
+                    const tryAfterInteraction = () => {
+                        if (userInteracted) {
+                            forcePlayVideo(video, index, retryCount + 1);
+                        }
+                    };
+                    setTimeout(tryAfterInteraction, 500);
+                } else {
+                    setTimeout(() => {
+                        forcePlayVideo(video, index, retryCount + 1);
+                    }, 300);
+                }
+            }
+        });
+    }
+}
+
+function showSlide(index) {
+    console.log('\n=== Showing slide:', index, 'of', slides.length, '===');
+    
+    // First, hide all slides and pause only non-active videos
     slides.forEach((slide, i) => {
-        const video = slide.querySelector('video');
-        if (video) {
-            video.pause();
-            video.currentTime = 0;
-        }
         slide.classList.remove('active');
+        slide.style.zIndex = '0';
+        
+        // Only pause videos that are NOT in the slide we're about to show
+        if (i !== index) {
+            const video = slide.querySelector('video');
+            if (video) {
+                try {
+                    video.pause();
+                } catch (e) {
+                    console.error('Error pausing video', i, ':', e);
+                }
+            }
+        }
     });
     
     // Then activate the current slide
     const currentSlideElement = slides[index];
     currentSlideElement.classList.add('active');
+    currentSlideElement.style.zIndex = '1';
     
     // Check if this slide has a video
     const video = currentSlideElement.querySelector('video');
     if (video) {
-        console.log('Playing video for slide', index);
+        console.log('Attempting to play video for slide', index);
         
-        // Ensure video is muted and ready
-        video.muted = true;
-        
-        // Small delay to ensure the slide is visible before playing
+        // Multiple attempts to ensure video plays
         setTimeout(() => {
-            // Reset to start and play
-            video.currentTime = 0;
-            
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('Video playing successfully for slide', index);
-                }).catch(error => {
-                    console.error('Video autoplay prevented for slide', index, ':', error);
-                    
-                    // Try to reload and play again
-                    video.load();
-                    setTimeout(() => {
-                        video.play().catch(e => {
-                            console.error('Video play retry failed for slide', index, ':', e);
-                        });
-                    }, 100);
-                });
+            forcePlayVideo(video, index);
+        }, 50);
+        
+        // Additional backup attempt
+        setTimeout(() => {
+            if (video.paused) {
+                console.warn('Video still paused after 300ms, trying again');
+                forcePlayVideo(video, index);
             }
-        }, 100);
+        }, 300);
+        
+        // Final check
+        setTimeout(() => {
+            if (video.paused) {
+                console.error('⚠ Video failed to play for slide', index, 'after multiple attempts');
+            } else {
+                console.log('✓ Video confirmed playing for slide', index);
+            }
+        }, 1000);
+    } else {
+        console.log('Slide', index, 'is an image (no video)');
     }
 }
 
@@ -87,16 +184,17 @@ function nextSlide() {
 // Start the slideshow
 if (slides.length > 0) {
     console.log('Starting slideshow with', slides.length, 'slides');
+    console.log('Browser:', navigator.userAgent);
     
     // Preload all videos first
     preloadVideos();
     
-    // Wait a bit for videos to start loading, then show first slide
+    // Wait for videos to start loading, then show first slide
     setTimeout(() => {
         showSlide(currentSlide);
         // Automatically advance every 5 seconds
-        setInterval(nextSlide, slideInterval);
-    }, 500);
+        slideshowInterval = setInterval(nextSlide, slideInterval);
+    }, 1000);
 } else {
     console.log('No slides found for slideshow');
 }
