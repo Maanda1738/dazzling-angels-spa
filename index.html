@@ -776,25 +776,25 @@
                 </div>
 
                 <div class="booking-form-section">
-                    <form class="booking-form" method="POST" action="https://formspree.io/f/xjggbybq">
+                    <form class="booking-form" id="bookingForm" onsubmit="return sendEmail(event)">
                         <div class="form-group">
-                            <input type="text" name="name" placeholder="Full Name" required>
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="email" name="email" placeholder="Email Address" required>
+                                <input type="email" id="email" name="email" placeholder="Email Address" required>
                             </div>
                             <div class="form-group">
-                                <input type="tel" name="phone" placeholder="Phone Number" required>
+                                <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="booking-date" style="display: block; margin-bottom: 5px; color: #666; font-size: 14px;">Select Date</label>
-                                <input type="date" id="booking-date" name="date" required style="color: #333;">
+                                <input type="date" id="date" name="date" required style="color: #333;">
                             </div>
                             <div class="form-group">
-                                <select name="time" required>
+                                <select id="time" name="time" required>
                                     <option value="">Select Time</option>
                                     <option value="9am">9:00 AM</option>
                                     <option value="10am">10:00 AM</option>
@@ -810,7 +810,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <select name="service" required>
+                            <select id="service" name="service" required>
                                 <option value="">Select Service</option>
                                 <option value="body-massage">Body Massage</option>
                                 <option value="hot-stones">Hot Stones</option>
@@ -825,7 +825,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea name="message" placeholder="Special Requests (Optional)" rows="4"></textarea>
+                            <textarea id="message" name="message" placeholder="Special Requests (Optional)" rows="4"></textarea>
                         </div>
                         <button type="submit" class="btn-primary btn-full">Confirm Booking</button>
                         <p class="form-status" style="display:none; margin-top: 15px; padding: 10px; border-radius: 5px;"></p>

@@ -457,4 +457,46 @@ document.querySelectorAll('video').forEach(video => {
     });
 });
 
+// Booking Form - Send via Email
+function sendEmail(event) {
+    event.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value;
+    
+    // Build email body
+    const subject = `Booking Request - ${name}`;
+    const body = `
+BOOKING REQUEST
+===============
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Date: ${date}
+Time: ${time}
+Service: ${service}
+
+Special Requests:
+${message || 'None'}
+
+---
+Sent from Dazzling Angels Day Spa website
+    `.trim();
+    
+    // Create mailto link
+    const mailtoLink = `mailto:bookings@dazzlingangelsspa.co.za?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    return false;
+}
+
 console.log('Dazzling Angels Day Spa website loaded successfully!');
