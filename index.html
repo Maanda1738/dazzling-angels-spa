@@ -776,12 +776,11 @@
                 </div>
 
                 <div class="booking-form-section">
-                    <form class="booking-form" method="POST" action="https://formsubmit.co/bookings@dazzlingangelsspa.co.za">
-                        <input type="hidden" name="_subject" value="New Booking from Dazzling Angels Day Spa Website">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_next" value="https://www.dazzlingangelsspa.co.za/#contact">
-                        <input type="hidden" name="_autoresponse" value="Thank you for booking with Dazzling Angels Day Spa! We've received your request and will contact you shortly to confirm your appointment.">
+                    <form class="booking-form" name="booking" method="POST" netlify netlify-honeypot="bot-field" data-netlify="true">
+                        <input type="hidden" name="form-name" value="booking">
+                        <p style="display:none;">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Full Name" required>
                         </div>
