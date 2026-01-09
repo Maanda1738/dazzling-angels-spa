@@ -776,11 +776,13 @@
                 </div>
 
                 <div class="booking-form-section">
-                    <form class="booking-form" name="booking" method="POST" netlify netlify-honeypot="bot-field" data-netlify="true">
-                        <input type="hidden" name="form-name" value="booking">
-                        <p style="display:none;">
-                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                        </p>
+                    <form class="booking-form" method="POST" action="https://formsubmit.co/bookings@dazzlingangelsspa.co.za">
+                        <!-- FormSubmit Configuration -->
+                        <input type="hidden" name="_subject" value="New Booking Request - Dazzling Angels Spa">
+                        <input type="hidden" name="_next" value="https://www.dazzlinganglesspa.co.za/thank-you.html">
+                        <input type="hidden" name="_captcha" value="true">
+                        <input type="text" name="_honey" style="display:none">
+                        
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Full Name" required>
                         </div>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - Dazzling Angels Day Spa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fdf4f7 0%, #fff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .success-container {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(232, 160, 191, 0.25);
+            text-align: center;
+            max-width: 600px;
+        }
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e8a0bf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+        .checkmark::after {
+            content: "✓";
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        h1 {
+            color: #6b3950;
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+        }
+        p {
+            color: #6b7280;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .btn-home {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #e8a0bf;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-home:hover {
+            background: #c17b9e;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(232, 160, 191, 0.3);
+        }
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #fdf4f7;
+        }
+        .contact-info p {
+            font-size: 16px;
+            color: #6b3950;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark"></div>
+        <h1>Thank You for Booking!</h1>
+        <p>We've received your appointment request successfully. Our team will contact you shortly to confirm your booking details.</p>
+        <p>We look forward to pampering you at Dazzling Angels Day Spa!</p>
+        <a href="/" class="btn-home">Return to Home</a>
+        
+        <div class="contact-info">
+            <p><strong>Questions?</strong></p>
+            <p>Call us: <a href="tel:+27799132812" style="color: #e8a0bf; text-decoration: none;">(079) 913 2812</a></p>
+            <p>Email: <a href="mailto:bookings@dazzlingangelsspa.co.za" style="color: #e8a0bf; text-decoration: none;">bookings@dazzlingangelsspa.co.za</a></p>
+        </div>
+    </div>
+</body>
+</html>
