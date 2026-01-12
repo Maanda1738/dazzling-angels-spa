@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Price List - Dazzling Angels Day Spa</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="View our complete price list for massage, facial treatments, manicure & pedicure, and waxing services at Dazzling Angels Day Spa in Pretoria.">
+    <meta name="keywords" content="spa prices Pretoria, massage prices, facial prices, manicure pedicure prices, waxing prices, spa packages Pretoria">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.dazzlingangelsspa.co.za/pricing.html">
+    <meta property="og:title" content="Full Price List - Dazzling Angels Day Spa">
+    <meta property="og:description" content="View our complete price list for all spa services. Professional treatments at affordable prices.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.dazzlingangelsspa.co.za/pricing.html">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Navbar Styles for Pricing Page */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #e8a0bf;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #6b3950;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #e8a0bf;
+        }
+        
+        .contact-btn {
+            padding: 12px 30px;
+            background: #e8a0bf;
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: #c17b9e;
+            transform: translateY(-2px);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #6b3950;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+        }
+        
+        .pricing-page {
+            padding-top: 100px;
+            background: #fdf4f7;
+            min-height: 100vh;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(232, 160, 191, 0.2);
+        }
+        
+        .pricing-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: #6b3950;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-header p {
+            font-size: 1.1rem;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .back-button {
+            display: inline-block;
+            margin: 20px;
+            padding: 15px 35px;
+            background: #e8a0bf;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .back-button:hover {
+            background: #c17b9e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(232, 160, 191, 0.3);
+        }
+        
+        .back-button i {
+            margin-right: 8px;
+        }
+        
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .pricing-category {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(232, 160, 191, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(232, 160, 191, 0.25);
+        }
+        
+        .category-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: #e8a0bf;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e8a0bf;
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-title i {
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        .pricing-table {
+            width: 100%;
+        }
+        
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #fdf4f7;
+            transition: all 0.3s ease;
+        }
+        
+        .price-row:last-child {
+            border-bottom: none;
+        }
+        
+        .price-row:hover {
+            background: #fdf4f7;
+            padding-left: 15px;
+            border-radius: 8px;
+        }
+        
+        .service-details {
+            flex: 1;
+        }
+        
+        .service-name {
+            font-weight: 600;
+            color: #6b3950;
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+        
+        .service-duration {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .service-price {
+            font-weight: 700;
+            color: #e8a0bf;
+            font-size: 1.4rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            margin-top: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(232, 160, 191, 0.2);
+        }
+        
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #6b3950;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+        
+        .book-now-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: #e8a0bf;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .book-now-btn:hover {
+            background: #c17b9e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(232, 160, 191, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-header h1 {
+                font-size: 2rem;
+            }
+            
+            .category-title {
+                font-size: 1.8rem;
+            }
+            
+            .price-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .service-price {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h2>Dazzling Angels Day Spa</h2>
+                    <p class="logo-subtitle"></p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="pricing.html" class="active">Pricing</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <a href="index.html#contact" class="contact-btn" style="display: inline-block; text-decoration: none;">Book Now</a>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pricing-page">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
+        <div class="pricing-header">
+            <h1>Our Full Price List</h1>
+            <p>Transparent pricing for all our premium spa services. Book your perfect treatment today!</p>
+        </div>
+        
+        <div class="pricing-container">
+            <!-- Body Massage -->
+            <div class="pricing-category">
+                <h2 class="category-title">
+                    <i class="fas fa-spa"></i>
+                    Body Massage
+                </h2>
+                <div class="pricing-table">
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Body Massage</div>
+                            <div class="service-duration">60 minutes</div>
+                        </div>
+                        <div class="service-price">R450</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Body Massage</div>
+                            <div class="service-duration">30 minutes</div>
+                        </div>
+                        <div class="service-price">R300</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Body Massage</div>
+                            <div class="service-duration">90 minutes</div>
+                        </div>
+                        <div class="service-price">R750</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Body Massage with Hot Stones</div>
+                            <div class="service-duration">60 minutes</div>
+                        </div>
+                        <div class="service-price">R500</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Aromatherapy Massage</div>
+                            <div class="service-duration">60 minutes</div>
+                        </div>
+                        <div class="service-price">R500</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Deep Tissue Massage</div>
+                            <div class="service-duration">60 minutes</div>
+                        </div>
+                        <div class="service-price">R550</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Head, Neck & Shoulder</div>
+                            <div class="service-duration">30 minutes</div>
+                        </div>
+                        <div class="service-price">R250</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Back Massage</div>
+                            <div class="service-duration">30 minutes</div>
+                        </div>
+                        <div class="service-price">R300</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Foot Soak, Exfoliation & Massage</div>
+                            <div class="service-duration">30 minutes</div>
+                        </div>
+                        <div class="service-price">R250</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facial Treatment -->
+            <div class="pricing-category">
+                <h2 class="category-title">
+                    <i class="fas fa-user"></i>
+                    Facial Treatment
+                </h2>
+                <div class="pricing-table">
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Relaxing Facial</div>
+                        </div>
+                        <div class="service-price">R400</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Deep Cleanse Facial</div>
+                        </div>
+                        <div class="service-price">R600</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Dazzling Hydro Facial Glow</div>
+                        </div>
+                        <div class="service-price">R600</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Back Scrub and Polish</div>
+                        </div>
+                        <div class="service-price">R300</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Body Scrub and Polish</div>
+                        </div>
+                        <div class="service-price">R750</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manicure and Pedicure -->
+            <div class="pricing-category">
+                <h2 class="category-title">
+                    <i class="fas fa-hand-sparkles"></i>
+                    Manicure and Pedicure
+                </h2>
+                <div class="pricing-table">
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Hands Overlay Gel</div>
+                        </div>
+                        <div class="service-price">R260</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Soak Off</div>
+                        </div>
+                        <div class="service-price">R100</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Toes Overlay Gel</div>
+                        </div>
+                        <div class="service-price">R200</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Nail Polish, Scrub + Massage</div>
+                        </div>
+                        <div class="service-price">R200</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Man Buff and Shine</div>
+                        </div>
+                        <div class="service-price">R200</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Paraffin Wax</div>
+                        </div>
+                        <div class="service-price">R250</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Dazzling Angels Pedicure Treatment</div>
+                        </div>
+                        <div class="service-price">R400</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Waxing -->
+            <div class="pricing-category">
+                <h2 class="category-title">
+                    <i class="fas fa-fire"></i>
+                    Waxing
+                </h2>
+                <div class="pricing-table">
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Underarm</div>
+                        </div>
+                        <div class="service-price">R250</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Leg</div>
+                        </div>
+                        <div class="service-price">R250</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Half Leg</div>
+                        </div>
+                        <div class="service-price">R200</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Lip Chin / Brows</div>
+                        </div>
+                        <div class="service-price">R150</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Chest</div>
+                        </div>
+                        <div class="service-price">R300</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Bikini</div>
+                        </div>
+                        <div class="service-price">R200</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Full Back</div>
+                        </div>
+                        <div class="service-price">R300</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Half Back</div>
+                        </div>
+                        <div class="service-price">R220</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">G-String</div>
+                        </div>
+                        <div class="service-price">R200</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Brazilian</div>
+                        </div>
+                        <div class="service-price">R300</div>
+                    </div>
+                    <div class="price-row">
+                        <div class="service-details">
+                            <div class="service-name">Hollywood</div>
+                        </div>
+                        <div class="service-price">R350</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Ready to Experience Ultimate Relaxation?</h2>
+                <p>Book your appointment today and let us pamper you with our professional spa services.</p>
+                <a href="index.html#contact" class="book-now-btn">
+                    <i class="fas fa-calendar-check"></i> Book Your Appointment
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
